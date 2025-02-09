@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mercury Demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 flex" style="width: 100%">
+    <div class="bg-white shadow-md h-screen p-4 space-y-4" style="width: 15%">
+      <div class="flex items-center space-x-2 md-6 py-4">
+        <div class="bg-black text-white p-2 rounded-full">⚫</div>
+        <span class="text-lg font-semibold"> Mercury Demo</span>
+      </div>
+      <nav class="space-y-2">
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          🏠 Home
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          📝 Tasks
+          <span class="bg-gray-800 text-gray-100 px-2 py-1 rounded-full text-xs"
+            >5</span
+          >
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          📊 Transactions
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          💰 Payment
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          💳 Cards
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          📈 Capital
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          🏦 Accounts
+        </div>
+
+        <div class="mt-4 text-gary-500 uppercase text-sm py-2">Workflows</div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          🧾 Bill Pay
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          📄 Invoicing
+        </div>
+        <div
+          class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center"
+        >
+          📖 Accounting
+        </div>
+      </nav>
+    </div>
+
+    <div class="h-screen overflow-y-scroll" style="width: 85%">
+      <header
+        class="w-full bg-white border-b border-gray-200 sticky top-0 z-10 p-4 justify-between items-center"
+      >
+        <div class="w-full flex items-center justify-between p-4">
+          <div class="w-full flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
+              <!-- Building Icon Placeholder -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-building"
+              >
+                <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
+                <path d="M9 22v-4h6v4" />
+                <path d="M8 6h.01" />
+                <path d="M16 6h.01" />
+                <path d="M12 6h.01" />
+                <path d="M12 10h.01" />
+                <path d="M12 14h.01" />
+                <path d="M16 10h.01" />
+                <path d="M16 14h.01" />
+                <path d="M8 10h.01" />
+                <path d="M8 14h.01" />
+              </svg>
+              <span class="font-semibold text-xl">Mercury Demo</span>
+            </div>
+            <div class="relative hidden md:block">
+              <input
+                type="text"
+                placeholder="Search or jump to..."
+                class="px-4 py-2 w-64 lg:w-96 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6851ff] focus:border-transparent"
+              />
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <!-- <nav class="hidden md:flex items-center space-x-1">
+  
+  
+            </nav> -->
+            <button class="p-2 hover:bg-gray-100 rounded-lg">
+              <!-- Bell Icon Placeholder -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-bell"
+              >
+                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                <path
+                  d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+                />
+              </svg>
+            </button>
+            <div
+              class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center"
+            >
+              <span class="text-sm font-medium text-purple-700">J</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Tasks Contant -->
+      <!-- Content Area -->
+      <div class="p-4">
+        <h1 class="text-2xl font-semibold mb-6">Welcome, Jane</h1>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <button
+            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-send"
+            >
+              <path
+                d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"
+              />
+              <path d="m21.854 2.147-10.94 10.939" />
+            </svg>
+            <span>Send</span>
+          </button>
+          <button
+            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
+          >
+            <span>Request</span>
+          </button>
+          <button
+            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
+          >
+            <span>Transfer</span>
+          </button>
+          <button
+            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-plus"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+            <span>Deposit</span>
+          </button>
+          <button
+            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-file-text"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              <path d="M10 9H8" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+            <span>Pay Bill</span>
+          </button>
+          <button
+            class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center space-x-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-file-text"
+            >
+              <path
+                d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+              />
+              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              <path d="M10 9H8" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+            <span>Create Invoice</span>
+          </button>
+        </div>
+
+        <!-- Balance Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-2">
+          <div
+            class="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-6"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-lg font-semibold">Mercury balance</h2>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-info"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4" />
+                  <path d="M12 8h.01" />
+                </svg>
+              </div>
+              <div class="text-2xl lg:text-3xl font-bold">
+                $5,144,707<span class="text-gray-500">.08</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-barcode"
+                >
+                  <path d="M3 5v14" />
+                  <path d="M8 5v14" />
+                  <path d="M12 5v14" />
+                  <path d="M17 5v14" />
+                  <path d="M21 5v14" />
+                </svg>
+              </button>
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-table-properties"
+                >
+                  <path d="M15 3v18" />
+                  <rect width="18" height="18" x="3" y="3" rx="2" />
+                  <path d="M21 9H3" />
+                  <path d="M21 15H3" />
+                </svg>
+              </button>
+            </div>
+            <div class="h-48 w-full bg-gray-50 rounded-lg"></div>
+            <!-- Placeholder for a chart or similar visual -->
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-semibold">Accounts</h2>
+              <button class="p-1 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-plus"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
+              </button>
+            </div>
+            <!-- Sample account list -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Credit Card</span>
+                <span class="font-medium">$12,505.87</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Treasury</span>
+                <span class="font-medium">$200,000.00</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Ops / Payroll</span>
+                <span class="font-medium">$2,023,267.12</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">AP</span>
+                <span class="font-medium">$226,767.82</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">AR</span>
+                <span class="font-medium">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Cards Section -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-2 p-4"
+      >
+        <!-- Credit Card Section -->
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold">Credit Card</h2>
+            <div class="flex items-center space-x-2">
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-printer"
+                >
+                  <path
+                    d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+                  />
+                  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+                  <rect x="6" y="14" width="12" height="8" rx="1" />
+                </svg>
+              </button>
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-unfold-horizontal"
+                >
+                  <path d="M16 12h6" />
+                  <path d="M8 12H2" />
+                  <path d="M12 2v2" />
+                  <path d="M12 8v2" />
+                  <path d="M12 14v2" />
+                  <path d="M12 20v2" />
+                  <path d="m19 15 3-3-3-3" />
+                  <path d="m5 9-3 3 3 3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="mb-6">
+            <div class="text-2xl font-bold">
+              $12,505<span class="text-gray-500">.87</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 mt-2">
+              <div class="flex items-center space-x-2">
+                <div class="h-2 w-2 rounded-full bg-[#6851ff]"></div>
+                <span class="text-sm text-gray-600">Balance</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="h-2 w-2 rounded-full bg-gray-300"></div>
+                <span class="text-sm text-gray-600">Pending</span>
+              </div>
+              <span class="text-sm text-gray-600">$21,249 available</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-sm text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-clock"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span>Autopay</span>
+              <span>Feb 13</span>
+            </div>
+            <button
+              class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200"
+            >
+              Pay
+            </button>
+          </div>
+        </div>
+
+        <!-- Bill Pay Section -->
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg font-semibold">Bill Pay</h2>
+            <div class="flex items-center space-x-2">
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-plus"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
+              </button>
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-unfold-horizontal"
+                >
+                  <path d="M16 12h6" />
+                  <path d="M8 12H2" />
+                  <path d="M12 2v2" />
+                  <path d="M12 8v2" />
+                  <path d="M12 14v2" />
+                  <path d="M12 20v2" />
+                  <path d="m19 15 3-3-3-3" />
+                  <path d="m5 9-3 3 3 3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <div>
+              <div class="text-sm text-gray-600">Outstanding</div>
+              <div class="font-medium">11</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-600">Overdue</div>
+              <div class="font-medium">1</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-600">Due soon</div>
+              <div class="font-medium">-</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm text-gray-600">Inbox</div>
+              <div class="font-medium">3 bills</div>
+            </div>
+            <button
+              class="text-[#6851ff] hover:text-[#5a46e5] text-sm font-medium flex items-center space-x-1"
+            >
+              <span>View</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-right"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Invoicing Section -->
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg font-semibold">Invoicing</h2>
+            <div class="flex items-center space-x-2">
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-plus"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5v14" />
+                </svg>
+              </button>
+              <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-arrow-right"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div>
+              <div class="text-sm text-gray-600">Overdue</div>
+              <div class="font-medium">
+                4 · $950<span class="text-sm">.00</span>
+              </div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-600">Paid</div>
+              <div class="font-medium">12 · $6K</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm text-gray-600">Open</div>
+              <div class="font-medium">12 invoices · $12.3K</div>
+            </div>
+            <button
+              class="text-[#6851ff] hover:text-[#5a46e5] text-sm font-medium flex items-center space-x-1"
+            >
+              <span>View</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-right"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Money Movement -->
+      <div class="mb-2 p-4">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg font-semibold">Money movement</h2>
+          <div class="flex items-center space-x-2">
+            <button class="text-gray-600 hover:text-gray-800">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+            <span class="text-gray-600">Feb 2025</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Money In Section -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <div class="mb-6">
+              <h3 class="text-gray-600 mb-2">Money in</h3>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-2xl font-bold text-green-600">$142,501</span>
+                <span class="text-green-600">.48</span>
+              </div>
+            </div>
+            <h4 class="text-sm font-medium text-gray-600 mb-4">Top sources</h4>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Jameson Accounting</span>
+                <span class="font-medium">$43,450.50</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Google</span>
+                <span class="font-medium">$35,820.05</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Milgram Brokerage</span>
+                <span class="font-medium">$24,344.02</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Orange, Inc.</span>
+                <span class="font-medium">$16,362.24</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Money Out Section -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <div class="mb-6">
+              <h3 class="text-gray-600 mb-2">Money out</h3>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-2xl font-bold text-red-600">-$198,606</span>
+                <span class="text-red-600">.57</span>
+              </div>
+            </div>
+            <h4 class="text-sm font-medium text-gray-600 mb-4">Top spend</h4>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-red-600">Gusto (Payroll)</span>
+                <span class="font-medium text-red-600">-$90,122.53</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-red-600">Google</span>
+                <span class="font-medium text-red-600">-$33,012.41</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-red-600">Milgram Brokerage</span>
+                <span class="font-medium text-red-600">-$27,685.00</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-red-600">Orange, Inc.</span>
+                <span class="font-medium text-red-600">-$19,934.80</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="mb-8 p-4">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold flex items-center space-x-2">
+            <span>Recent transactions</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </h2>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg overflow-x-auto">
+          <table class="w-full min-w-[800px]">
+            <thead>
+              <tr class="border-b border-gray-200">
+                <th
+                  class="text-left py-3 px-6 text-sm font-medium text-gray-500"
+                >
+                  Date
+                </th>
+                <th
+                  class="text-left py-3 px-6 text-sm font-medium text-gray-500"
+                >
+                  To/From
+                </th>
+                <th
+                  class="text-right py-3 px-6 text-sm font-medium text-gray-500"
+                >
+                  Amount
+                </th>
+                <th
+                  class="text-left py-3 px-6 text-sm font-medium text-gray-500"
+                >
+                  Account
+                </th>
+                <th
+                  class="text-left py-3 px-6 text-sm font-medium text-gray-500"
+                >
+                  Payment Method
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Sample Transaction Entries -->
+              <tr class="border-b border-gray-200 hover:bg-gray-50">
+                <td class="py-4 px-6 text-sm text-gray-600">Feb 10</td>
+                <td class="py-4 px-6">Contractor</td>
+                <td class="py-4 px-6 text-right text-gray-900">-$213.11</td>
+                <td class="py-4 px-6 text-sm text-gray-600">Ops / Payroll</td>
+                <td class="py-4 px-6">Mercury ACH Payment</td>
+              </tr>
+              <tr class="border-b border-gray-200 hover:bg-gray-50">
+                <td class="py-4 px-6 text-sm text-gray-600">Feb 8</td>
+                <td class="py-4 px-6">Payment from Acme Corp</td>
+                <td class="py-4 px-6 text-right text-green-600">$200.00</td>
+                <td class="py-4 px-6 text-sm text-gray-600">AR</td>
+                <td class="py-4 px-6">Invoice Payment</td>
+              </tr>
+              <tr class="border-b border-gray-200 hover:bg-gray-50">
+                <td class="py-4 px-6 text-sm text-gray-600">Feb 8</td>
+                <td class="py-4 px-6">Payment from NASA</td>
+                <td class="py-4 px-6 text-right text-green-600">$419.00</td>
+                <td class="py-4 px-6 text-sm text-gray-600">AR</td>
+                <td class="py-4 px-6">Request Payment</td>
+              </tr>
+              <!-- Additional transactions can be added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </divdnjkdbdjhb>
+    <script src="./index.js"></script>
+  </body>
+</html>
