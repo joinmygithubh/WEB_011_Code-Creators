@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mercury | Banking for Startups</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        width: 200px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .container {
+        width: 80%;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .balance-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .pay-btn {
+        background-color: #4caf50;
+        margin-right: 1000px;
+        position: absolute;
+        top: 25px; /* Adjust this value as needed to control how far up it moves */
+        right: -250px;
+      }
+
+      .autopay-btn {
+        background-color: #ffa500;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f8f8f8;
+      }
+
+      .cashback {
+        color: green;
+      }
+      .table-container {
+        max-height: 400px; /* Adjust height as needed */
+        overflow-y: auto;
+        border: 1px solid #ddd; /* Optional: adds a border around the scrollable area */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f8f8f8;
+        position: sticky;
+        top: 0;
+        z-index: 2; /* Ensures header stays on top */
+      }
+      .navbar input[type="text"] {
+        flex-grow: 1; /* Makes it expand */
+        max-width: 500px; /* Optional limit */
+        margin-right: 5px; /* Adds spacing before buttons */
+        margin-left: 90px;
+      }
+      #chart_div {
+        width: 60%; /* Adjust this percentage to make it smaller */
+        margin-left: 420px; /* Center the chart */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <input type="text" placeholder="Search cards or more" />
+      <div class="actions">
+        <button class="move-money">Move Money</button>
+        <div class="profile-icon"></div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Credit Card</h2>
+      <div class="balance-section">
+        <div class="balance-info">
+          <h1>$12,505.87</h1>
+          <p>
+            Balance: <span class="pending">Pending</span>
+            <span class="available">$21,249 available</span>
+          </p>
+        </div>
+        <button class="pay-btn">Pay</button>
+      </div>
+      <script
+        type="text/javascript"
+        src="https://www.gstatic.com/charts/loader.js"
+      ></script>
+      <div id="chart_div"></div>
+      <button class="autopay-btn">Autopay Feb 22</button>
+      <div class="summary">
+        <p>
+          This month: <span class="cashback">$1,470 cashback</span> >
+          <span class="spent">$98,000 spent</span> >
+          <span class="cards-added">56 cards added</span>
+        </p>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Ending Balance</th>
+              <th>Cashback Earned</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Intl. Transaction Fee Rebate</td>
+              <td>$1.43</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+            <tr>
+              <td>Feb 27</td>
+              <td>Daily Spending</td>
+              <td>$3,500.00</td>
+              <td>$3,500.00</td>
+              <td>$52.50</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  google.charts.load("current", { packages: ["corechart", "line"] });
+  google.charts.setOnLoadCallback(drawBasic);
+
+  function drawBasic() {
+    var data = new google.visualization.DataTable();
+    data.addColumn("number", "X");
+    data.addColumn("number", "");
+
+    data.addRows([
+      [0, 0],
+      [1, 10],
+      [2, 23],
+      [3, 17],
+      [4, 18],
+      [5, 9],
+      [6, 11],
+      [7, 27],
+      [8, 33],
+      [9, 40],
+      [10, 32],
+      [11, 35],
+      [12, 30],
+      [13, 40],
+      [14, 42],
+      [15, 47],
+      [16, 44],
+      [17, 48],
+      [18, 52],
+      [19, 54],
+      [20, 42],
+      [21, 55],
+      [22, 56],
+      [23, 57],
+      [24, 60],
+      [25, 50],
+      [26, 52],
+      [27, 51],
+      [28, 49],
+      [29, 53],
+      [30, 55],
+      [31, 60],
+      [32, 61],
+      [33, 59],
+      [34, 62],
+      [35, 65],
+      [36, 62],
+      [37, 58],
+      [38, 55],
+      [39, 61],
+      [40, 64],
+      [41, 65],
+      [42, 63],
+      [43, 66],
+      [44, 67],
+      [45, 69],
+      [46, 69],
+      [47, 70],
+      [48, 72],
+      [49, 68],
+      [50, 66],
+      [51, 65],
+      [52, 67],
+      [53, 70],
+      [54, 71],
+      [55, 72],
+      [56, 73],
+      [57, 75],
+      [58, 70],
+      [59, 68],
+      [60, 64],
+      [61, 60],
+      [62, 65],
+      [63, 67],
+      [64, 68],
+      [65, 69],
+      [66, 70],
+      [67, 72],
+      [68, 75],
+      [69, 80],
+    ]);
+
+    var options = {
+      hAxis: {
+        title: "",
+      },
+      vAxis: {
+        title: "",
+      },
+    };
+
+    var chart = new google.visualization.LineChart(
+      document.getElementById("chart_div")
+    );
+
+    chart.draw(data, options);
+  }
+</script>
