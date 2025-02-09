@@ -1,0 +1,111 @@
+<html lang="en">
+
+</html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasks Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-100 flex" style="width: 100%;">
+  <div class="bg-white shadow-md h-screen p-4 space-y-4" style="width: 15%;">
+    <div class="flex items-center space-x-2 md-6 py-4">
+      <div class="bg-black text-white p-2 rounded-full">
+        ⚫
+      </div>
+      <span class="text-lg font-semibold"> Mercury Demo</span>
+    </div>
+    <nav class="space-y-2">
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">🏠 Home</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">📝 Tasks <span
+          class="bg-gray-800 text-gray-100 px-2 py-1 rounded-full text-xs">5</span> </div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">📊 Transactions
+      </div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">💰 Payment</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">💳 Cards</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">📈 Capital</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">🏦 Accounts</div>
+
+      <div class="mt-4 text-gary-500 uppercase text-sm py-2">Workflows</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">🧾 Bill Pay</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">📄 Invoicing</div>
+      <div class="p-2 hover:bg-gray-200 rounded-lg cursor-pointer flex justify-between items-center">📖 Accounting</div>
+
+    </nav>
+  </div>
+
+  <div class="h-screen overflow-y-scroll"  style="width: 85%;">
+    <header class="w-full bg-white border-b border-gray-200 sticky top-0 z-10 p-4 justify-between items-center">
+      <div class="w-full flex items-center justify-between p-4">
+        <div class="w-full flex items-center space-x-4">
+          <div class="flex items-center space-x-2">
+            <!-- Building Icon Placeholder -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-building">
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
+              <path d="M9 22v-4h6v4" />
+              <path d="M8 6h.01" />
+              <path d="M16 6h.01" />
+              <path d="M12 6h.01" />
+              <path d="M12 10h.01" />
+              <path d="M12 14h.01" />
+              <path d="M16 10h.01" />
+              <path d="M16 14h.01" />
+              <path d="M8 10h.01" />
+              <path d="M8 14h.01" />
+            </svg>
+            <span class="font-semibold text-xl">Mercury Demo</span>
+          </div>
+          <div class="relative hidden md:block">
+            <input type="text" placeholder="Search or jump to..."
+              class="px-4 py-2 w-64 lg:w-96 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6851ff] focus:border-transparent" />
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <!-- <nav class="hidden md:flex items-center space-x-1">
+
+
+          </nav> -->
+          <button class="p-2 hover:bg-gray-100 rounded-lg">
+            <!-- Bell Icon Placeholder -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-bell">
+              <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+              <path
+                d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+            </svg>
+          </button>
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
+            <span class="text-sm font-medium text-purple-700">J</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tasks Contant -->
+    <div class=" p-4">
+      <h1 class="text-2xl font-semibold mb-6">Tasks</h1>
+      <div class="flex space-x-2 border-b border-gray-200 mb-4">
+        <button id="incompleteTab" 
+        class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900">
+          Incomplete
+        </button>
+        <button id="completedTab" 
+        class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900">
+          Completed
+        </button>
+      </div>
+    </div>
+
+    <div id="tasksContent" class="bg-white border border-gray-200 rounded-lg overflow-hidden p4">
+
+    </div>
+  </div>
+  <script src="./index.js"></script>
+</body>
+
+</html>
