@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .create-card-btn {
+            background-color: #f5f5f5;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        nav {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #666;
+            margin-right: 20px;
+        }
+
+        nav a.active {
+            color: #0066ff;
+            border-bottom: 2px solid #0066ff;
+        }
+
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+        }
+
+        .filter-btn {
+            background-color: #f5f5f5;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .chevron-down {
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .filter-status {
+            color: #666;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            z-index: 10;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .cards-table {
+            width: 100%;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+            padding: 16px 0;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: center;
+        }
+
+        .card-number {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 16px;
+            background-color: #333;
+            border-radius: 3px;
+        }
+
+        .spent-amount {
+            font-weight: 500;
+        }
+
+        .type-badge {
+            display: inline-flex;
+            align-items: center;
+            height: 24px;
+            padding: 0 8px;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            font-size: 13px;
+            color: #555;
+            width: fit-content;
+            font-weight: 400;
+        }
+
+        .cardholder-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .you-badge {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .table-container {
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .subscription-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr 1fr;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: center;
+        }
+
+        .merchant-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .merchant-logo {
+            width: 32px;
+            height: 32px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .spend-amount {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .payment-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .card-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-label {
+            font-size: 14px;
+        }
+
+        .cashback-info {
+            color: #4a4af4;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            color: #666;
+        }
+
+        .multiple-cards {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-stack {
+            display: flex;
+            align-items: center;
+        }
+
+        .card-stack .card-icon {
+            margin-left: -10px;
+        }
+
+        .card-stack .card-icon:first-child {
+            margin-left: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>Cards</h1>
+                <a href="#"><button class="create-card-btn">+ Create Card</button></a>
+            </div>
+            <nav>
+                <a href="#" class="nav-link active" data-tab="manage">Manage</a>
+                <a href="#" class="nav-link" data-tab="subscriptions">Subscriptions</a>
+            </nav>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn">
+                <svg class="chevron-down" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+                Add Filter
+            </button>
+            <span class="filter-status">No filters applied</span>
+
+            <!-- Dropdown menu -->
+            <div class="dropdown-menu">
+                <a href="#">Type</a>
+                <a href="#">Status</a>
+                <a href="#">Cardholder</a>
+                <a href="#">Date created</a>
+            </div>
+        </div>
+
+        <!-- Manage Tab Content -->
+        <div id="manage" class="tab-content">
+            <div class="cards-table">
+                <div class="table-header">
+                    <div class="col-cardholder">Cardholder</div>
+                    <div class="col-card">Card</div>
+                    <div class="col-spent">Spent this month</div>
+                    <div class="col-type">Type</div>
+                    <div class="col-account">Account</div>
+                </div>
+                <div class="table-body" id="manageTableBody">
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscriptions Tab Content -->
+        <div id="subscriptions" class="tab-content hidden">
+            <div class="table-container">
+                <div class="table-header">
+                    <div class="column merchant">Merchant</div>
+                    <div class="column spend">Last 30 Day Spend</div>
+                    <div class="column payment">Payment Method</div>
+                    <div class="column actions">Actions</div>
+                </div>
+                <div class="table-body" id="subscriptionsList">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardData = [
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '1234',
+                    cardName: 'Office Card',
+                    spent: 10789.00,
+                    type: 'Virtual',
+                    account: 'Checking ••0297'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '2345',
+                    spent: 0.00,
+                    type: 'Physical',
+                    account: 'Checking ••0297'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3745',
+                    spent: 16.00,
+                    type: 'Physical',
+                    account: 'Checking ••0297'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '6231',
+                    spent: 110.00,
+                    type: 'Physical',
+                    account: 'Checking ••0297'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '4928',
+                    cardName: 'Grocery/Meals',
+                    spent: 0.00,
+                    type: 'Virtual',
+                    account: 'Ops / Payroll'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '5555',
+                    spent: 0.00,
+                    type: 'Physical',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }, {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '0330',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                },
+                {
+                    cardholder: { name: 'Jane Black', isYou: true },
+                    cardNumber: '3054',
+                    cardName: 'Office supplies',
+                    spent: 1500.00,
+                    type: 'Virtual',
+                    account: 'Credit Card'
+                }
+            ];
+
+            const subscriptionsData = [
+                {
+                    merchant: "Adyen N.V.",
+                    logo: "AN",
+                    spend: 111.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "4928",
+                        type: "single",
+                        cashback: true
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "AMC",
+                    logo: "A",
+                    spend: 142.80,
+                    payment: {
+                        type: "multiple",
+                        count: 3
+                    }
+                },
+                {
+                    merchant: "At Home Store",
+                    logo: "HS",
+                    spend: 34.40,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "4928",
+                        type: "single",
+                        cashback: true
+                    }
+                },
+                {
+                    merchant: "Beenverified.Com",
+                    logo: "B",
+                    spend: 66.20,
+                    payment: {
+                        type: "multiple",
+                        count: 2
+                    }
+                },
+                {
+                    merchant: "Bridgecrest",
+                    logo: "B",
+                    spend: 95.40,
+                    payment: {
+                        type: "multiple",
+                        count: 3
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                },
+                {
+                    merchant: "Amazon Web Services",
+                    logo: "A",
+                    spend: 50.00,
+                    payment: {
+                        name: "Jane B.",
+                        cardNumber: "3054",
+                        type: "single"
+                    }
+                }
+            ];
+
+            const manageTableBody = document.getElementById('manageTableBody');
+            const subscriptionsList = document.getElementById('subscriptionsList');
+            const filterBtn = document.querySelector('.filter-btn');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            filterBtn.addEventListener('click', () => {
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tab = link.getAttribute('data-tab');
+
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    document.getElementById(tab).classList.remove('hidden');
+                });
+            });
+
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                }).format(amount);
+            };
+
+            cardData.forEach(card => {
+                const row = document.createElement('div');
+                row.className = 'table-row';
+
+                row.innerHTML = `
+                    <div class="cardholder-name">
+                        ${card.cardholder.name}
+                        ${card.cardholder.isYou ? '<span class="you-badge">You</span>' : ''}
+                    </div>
+                    <div class="card-number">
+                        <div class="card-icon"></div>
+                        ••${card.cardNumber}${card.cardName ? ' ' + card.cardName : ''}
+                    </div>
+                    <div class="spent-amount">${formatCurrency(card.spent)}</div>
+                    <div class="type-badge">${card.type}</div>
+                    <div class="account">${card.account}</div>
+                `;
+
+                manageTableBody.appendChild(row);
+            });
+
+            function createMerchantLogo(text) {
+                return `<div class="merchant-logo">${text}</div>`;
+            }
+
+            function createPaymentMethod(payment) {
+                if (payment.type === "multiple") {
+                    return `
+                        <div class="multiple-cards">
+                            <div class="card-stack">
+                                ${Array(payment.count).fill('<div class="card-icon"></div>').join('')}
+                            </div>
+                            <span>${payment.count} cards</span>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="payment-info">
+                        <div class="card-info">
+                            <div class="card-icon"></div>
+                            <span class="card-label">${payment.name} ••${payment.cardNumber}</span>
+                            <span class="user-tag">You</span>
+                        </div>
+                        ${payment.cashback ? '<div class="cashback-info">↗ Move to IO for 1.5% cashback</div>' : ''}
+                    </div>
+                `;
+            }
+
+            function createActionButtons() {
+                return `
+                    <button class="action-btn">↗</button>
+                    <button class="action-btn">⊘</button>
+                `;
+            }
+
+            subscriptionsData.forEach(sub => {
+                const row = document.createElement('div');
+                row.className = 'subscription-row';
+
+                row.innerHTML = `
+                    <div class="merchant-info">
+                        ${createMerchantLogo(sub.logo)}
+                        <span>${sub.merchant}</span>
+                    </div>
+                    <div class="spend-amount">$${sub.spend.toFixed(2)}</div>
+                    <div class="payment-method">
+                        ${createPaymentMethod(sub.payment)}
+                    </div>
+                    <div class="actions">
+                        ${createActionButtons()}
+                    </div>
+                `;
+
+                subscriptionsList.appendChild(row);
+            });
+        });
+    </script>
+</body>
+
+</html>
