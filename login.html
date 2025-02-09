@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;1,300&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="login-body">
+    <form class="login-form">
+      <h1>Sign in</h1>
+      <p>Stay updated on your Professional world</p>
+      <input type="text" placeholder="Email or phone" id="username" required />
+      <input type="password" placeholder="Password" id="password" required />
+      <p class="forgot-password">Forgot Password ?</p>
+      <input type="checkbox" class="checkbox" />
+      <p>
+        By clicking Agree & Join or Continue, you agree to the Mercury
+        <span>User Agreement, Private Policy,</span>and , Privacy Policy, and
+        <span>Cookie Policy.</span>
+      </p>
+      <button class="sign-in-btn">Sign in</button>
+      <div class="separator">
+        <span>or</span>
+      </div>
+      <button class="btn-register">Continue as Sameer</button>
+      <button class="btn-register">
+        <img src="./photos/microsoft_logo.svg" alt="" /> Continue as Microsoft
+      </button>
+    </form>
+    <p class="p-buss">New to Mercury? <a href="register.html">Join now</a></p>
+    <script>
+      document
+        .querySelector(".login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+
+          var user = localStorage.getItem("user");
+
+          if (user) {
+            var parsedUser = JSON.parse(user);
+            if (parsedUser.password === password) {
+              localStorage.setItem("user", JSON.stringify(parsedUser));
+              window.location.href = "profile.html";
+            } else {
+              alert("Incorrect password");
+            }
+          } else {
+            alert("User not found!");
+            window.location.href = "register.html";
+          }
+          
+        });
+    </script>
+  </body>
+</html>
