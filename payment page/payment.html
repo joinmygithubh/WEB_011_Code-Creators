@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+    }
+
+    .header, .headers {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .header button, .headers button {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header button {
+      background-color: #70739329;
+      color: black;
+      border-radius: 40px;
+    }
+
+    .headers button {
+      background-color: white;
+    }
+
+    .headers button:hover {
+      border-bottom: 2px solid blue;
+    }
+
+    .count-box {
+      background-color: #70739329;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      display: none;
+    }
+
+    table.active {
+      display: table;
+      opacity: 1;
+    }
+
+    table thead {
+      background-color: #f0f0f0;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .status {
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .status.pending { color: red; }
+    .status.scheduled { color: yellowgreen; }
+    .status.sent { color: green; }
+
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-info img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Payments</h1>
+      <button><i class="fas fa-paper-plane"></i> Send Money</button>
+    </div>
+    <div class="headers">
+      <button id="needApprovalBtn">Need Approval <span id="needApprovalCount" class="count-box">0</span></button>
+      <button id="scheduledBtn">Scheduled <span id="scheduledCount" class="count-box">0</span></button>
+      <button id="sentBtn">Sent <span id="sentCount" class="count-box">0</span></button>
+    </div>
+    <table id="needApprovalTable" class="active">
+      <thead>
+        <tr>
+          <th>Submitted on</th>
+          <th>To</th>
+          <th>Amount</th>
+          <th>Approvals</th>
+          <th>Requested by</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="needApprovalTableBody"></tbody>
+    </table>
+    <table id="scheduledTable">
+      <thead>
+        <tr>
+          <th>Submitted on</th>
+          <th>To</th>
+          <th>Amount</th>
+          <th>Approvals</th>
+          <th>Requested by</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="scheduledTableBody"></tbody>
+    </table>
+    <table id="sentTable">
+      <thead>
+        <tr>
+          <th>Submitted on</th>
+          <th>To</th>
+          <th>Amount</th>
+          <th>Approvals</th>
+          <th>Requested by</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="sentTableBody"></tbody>
+    </table>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const apiUrl = "https://mercuray-demo-default-rtdb.firebaseio.com/payment.json";
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const payments = Object.values(data || {});
+
+        function renderTable(data, tableBody) {
+            tableBody.innerHTML = "";
+            data.forEach(payment => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${payment.date || "N/A"}</td>
+                    <td>${payment.to || "N/A"}</td>
+                    <td>$${payment.amount ? payment.amount.toLocaleString() : "0.00"}</td>
+                    <td>${payment.approvals || "N/A"}</td>
+                 <td class="user-info">
+                        <img src="/users/profile.webp" alt="User" />
+                        ${payment.requestedBy || "N/A"}
+                    </td>
+                    <td><span class="status ${payment.status ? payment.status.toLowerCase() : ''}">${payment.status || "Unknown"}</span></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        const needApprovalPayments = payments.filter(p => p.status === "Pending");
+        const scheduledPayments = payments.filter(p => p.status === "Scheduled");
+        const sentPayments = payments.filter(p => p.status === "Sent");
+
+        renderTable(needApprovalPayments, document.getElementById("needApprovalTableBody"));
+        renderTable(scheduledPayments, document.getElementById("scheduledTableBody"));
+        renderTable(sentPayments, document.getElementById("sentTableBody"));
+
+        document.getElementById("needApprovalCount").textContent = needApprovalPayments.length;
+        document.getElementById("scheduledCount").textContent = scheduledPayments.length;
+        document.getElementById("sentCount").textContent = sentPayments.length;
+
+        function showTable(tableId) {
+            document.querySelectorAll("table").forEach(table => {
+                table.style.opacity = "0";
+                setTimeout(() => {
+                    table.classList.remove("active");
+                }, 200);
+            });
+            setTimeout(() => {
+                document.getElementById(tableId).classList.add("active");
+                document.getElementById(tableId).style.opacity = "1";
+            }, 200);
+        }
+
+        document.getElementById("needApprovalBtn").addEventListener("click", () => showTable("needApprovalTable"));
+        document.getElementById("scheduledBtn").addEventListener("click", () => showTable("scheduledTable"));
+        document.getElementById("sentBtn").addEventListener("click", () => showTable("sentTable"));
+    });
+  </script>
+</body>
+</html>
