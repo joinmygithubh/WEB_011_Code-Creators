@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;1,300&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
@@ -55,7 +55,7 @@
             var parsedUser = JSON.parse(user);
             if (parsedUser.password === password) {
               localStorage.setItem("user", JSON.stringify(parsedUser));
-              window.location.href = "profile.html";
+              window.location.href = "src/index.html";
             } else {
               alert("Incorrect password");
             }
