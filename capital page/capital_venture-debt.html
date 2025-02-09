@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital - Venture Debt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        nav {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #666;
+            position: relative;
+        }
+
+        .nav-link.active {
+            color: #4866E9;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #4866E9;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .balance-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .label {
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .balance {
+            font-size: 36px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .decimal {
+            font-size: 24px;
+            color: #666;
+        }
+
+        .interest-note {
+            color: #666;
+        }
+
+        .request-btn {
+            background-color: #4866E9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            display: flex;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .progress-segment {
+            height: 100%;
+        }
+
+        .progress-segment.outstanding {
+            background-color: #4866E9;
+        }
+
+        .progress-segment.available {
+            background-color: #8BA3FF;
+        }
+
+        .progress-segment.unavailable {
+            background-color: #E5E7EB;
+        }
+
+        .progress-segment.expired {
+            background-color: #9CA3AF;
+        }
+
+        .progress-legend {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.outstanding {
+            background-color: #4866E9;
+        }
+
+        .dot.available {
+            background-color: #8BA3FF;
+        }
+
+        .dot.unavailable {
+            background-color: #E5E7EB;
+        }
+
+        .dot.expired {
+            background-color: #9CA3AF;
+        }
+
+        .reporting-section {
+            background-color: #F3F4F6;
+            padding: 16px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reporting-info h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .reporting-info p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .complete-btn {
+            background-color: #4866E9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .side-panel>div {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .next-payment {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-more {
+            color: #4866E9;
+            text-decoration: none;
+        }
+
+        .download-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .advisor-section h3 {
+            margin-bottom: 4px;
+        }
+
+        .advisor-section>p {
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .advisor-info {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .advisor-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #E5E7EB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .advisor-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .advisor-details a {
+            color: #4866E9;
+            text-decoration: none;
+        }
+
+        .activity-section {
+            grid-column: 1 / -1;
+            margin-top: 24px;
+        }
+
+        .activity-section h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .activity-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .activity-table th,
+        .activity-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .activity-table th {
+            color: #666;
+            font-weight: normal;
+        }
+
+        .negative {
+            color: #DC2626;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Capital</h1>
+            <nav>
+                <a href="./capital-home.html" class="nav-link">Home</a>
+                <a href="./capital-working_capital.html" class="nav-link">Working Capital</a>
+                <a href="./capital_venture-debt.html" class="nav-link active">Venture Debt</a>
+                <a href="./capital_SAFEs.html" class="nav-link">SAFEs</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="dashboard-card">
+                <div class="balance-section">
+                    <div class="balance-info">
+                        <p class="label">Outstanding balance</p>
+                        <h2 class="balance">$5,000,000<span class="decimal">.00</span></h2>
+                        <p class="interest-note">Interest only ends Feb 18, 2025</p>
+                    </div>
+                    <button class="request-btn">Request Funds</button>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-segment outstanding" style="width: 50%"></div>
+                    <div class="progress-segment available" style="width: 10%"></div>
+                    <div class="progress-segment unavailable" style="width: 20%"></div>
+                    <div class="progress-segment expired" style="width: 20%"></div>
+                </div>
+
+                <div class="progress-legend">
+                    <span class="legend-item"><span class="dot outstanding"></span>$5M outstanding</span>
+                    <span class="legend-item"><span class="dot available"></span>$1M available today</span>
+                    <span class="legend-item"><span class="dot unavailable"></span>$2M unavailable</span>
+                    <span class="legend-item"><span class="dot expired"></span>$2M expired</span>
+                </div>
+
+                <div class="reporting-section">
+                    <div class="reporting-info">
+                        <h3>Monthly Reporting</h3>
+                        <p>Complete reporting to access your loan</p>
+                    </div>
+                    <button class="complete-btn">Complete Reporting</button>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="next-payment">
+                    <span>Next payment Mar 03</span>
+                    <a href="#" class="view-more">View more ›</a>
+                </div>
+
+                <div class="download-section">
+                    <a href="#" class="download-link">
+                        <!-- <img src="download-icon.svg" alt="Download"> -->
+                        Download Loan Agreement
+                    </a>
+                </div>
+
+                <div class="advisor-section">
+                    <h3>Questions?</h3>
+                    <p>Contact your capital advisor</p>
+                    <div class="advisor-info">
+                        <div class="advisor-avatar">JC</div>
+                        <div class="advisor-details">
+                            <p class="advisor-name">Jake Cooper</p>
+                            <a href="mailto:jacobc@mercury.com">jacobc@mercury.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="activity-section">
+                <h2>Activity</h2>
+                <table class="activity-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Account</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 4</td>
+                            <td>Venture Debt Loan Repayment</td>
+                            <td>Mercury Checking • •1038</td>
+                            <td class="negative">-$1,000.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.querySelector('.request-btn').addEventListener('click', () => {
+            console.log('Request funds clicked');
+        });
+
+        document.querySelector('.complete-btn').addEventListener('click', () => {
+            console.log('Complete reporting clicked');
+        });
+
+        // Add hover effects for interactive elements
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.opacity = '0.9';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.opacity = '1';
+            });
+        });
+
+        const progressSegments = document.querySelectorAll('.progress-segment');
+        progressSegments.forEach(segment => {
+            segment.addEventListener('mouseenter', (e) => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.style.position = 'absolute';
+                tooltip.style.background = '#333';
+                tooltip.style.color = 'white';
+                tooltip.style.padding = '4px 8px';
+                tooltip.style.borderRadius = '4px';
+                tooltip.style.fontSize = '12px';
+                tooltip.style.top = `${e.pageY - 30}px`;
+                tooltip.style.left = `${e.pageX}px`;
+                tooltip.textContent = segment.classList.contains('outstanding') ? '$5M outstanding' :
+                    segment.classList.contains('available') ? '$1M available' :
+                        segment.classList.contains('unavailable') ? '$2M unavailable' :
+                            '$2M expired';
+                document.body.appendChild(tooltip);
+            });
+
+            segment.addEventListener('mouseleave', () => {
+                const tooltip = document.querySelector('.tooltip');
+                if (tooltip) {
+                    tooltip.remove();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
