@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mercury | Banking for Startups</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb;
+        margin: 0;
+        padding: 0;
+        color: #1f2937;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 20px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .search input {
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        width: 700px;
+        font-size: 14px;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+      }
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+      }
+      .btn {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .btn.secondary {
+        background-color: #9ca3af;
+      }
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 100;
+        width: 180px;
+      }
+      .dropdown.show {
+        display: block;
+      }
+      .dropdown a {
+        display: block;
+        padding: 10px 15px;
+        color: #1f2937;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .dropdown a:hover {
+        background-color: #f3f4f6;
+      }
+      .main {
+        margin-top: 20px;
+      }
+      .account-info {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+      }
+      .top-right-buttons {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+      }
+      .account-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .balance h1 {
+        font-size: 30px;
+        margin: 10px 0;
+      }
+      .details-grid {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .detail-item {
+        text-align: center;
+        flex: 1;
+      }
+      .detail-item p {
+        margin: 5px 0;
+        font-weight: 600;
+      }
+      .view-statements-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .view-statements {
+        color: blue;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .view-statements:hover {
+        text-decoration: underline;
+      }
+      .more-button {
+        background: none;
+        border: none;
+        color: blue;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .auto-transfer-link {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        color: blue;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .auto-transfer-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="search">
+          <input type="text" placeholder="Search accounts or more" />
+        </div>
+        <div class="actions">
+          <button class="btn" id="moveMoneyBtn">
+            Move Money<span style="font-size: 12px">&#9662;</span>
+          </button>
+          <div class="dropdown" id="dropdownMenu">
+            <a href="#">Send</a>
+            <a href="#">Request</a>
+            <a href="#">Transfer</a>
+            <a href="#">Deposit</a>
+            <a href="#">Pay Bill</a>
+            <a href="#">Create Invoice</a>
+          </div>
+          <div class="profile">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGYMUXc3eu4OEtcWmjOfc8pgAgppiufWfnC0WZA_7lhVfTESaI6_XmyYA&s"
+              alt="User Avatar"
+              class="avatar"
+              style="margin-left: 16px"
+            />
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <h2 class="account-title">Checking ••0297</h2>
+        <div class="account-info">
+          <div class="box">
+            <div class="top-right-buttons">
+              <button class="btn">+ Deposit</button>
+              <div class="transfer-btn-container">
+                <button style="background-color: blue" class="btn secondary" id="transferBtn">
+                  Transfer<span style="font-size: 12px"> ▼</span>
+                </button>
+                <div class="dropdown" id="transferDropdown">
+                  <a href="#">Transfer To</a>
+                  <a href="#">Transfer From</a>
+                </div>
+              </div>
+            </div>
+            <div class="balance">
+              <p>Available</p>
+              <h1>$1,374,471.14</h1>
+            </div>
+            <div class="details-grid">
+              <div class="detail-item">
+                <p>Type</p>
+                <span>Checking</span>
+              </div>
+              <div class="detail-item">
+                <p>Current</p>
+                <span>$1,374,471.14</span>
+              </div>
+              <div class="detail-item">
+                <p>Pending outgoing</p>
+                <span>$0.00</span>
+              </div>
+            </div>
+            <a href="#" class="auto-transfer-link">
+              Set up auto transfer rules
+            </a>
+          </div>
+          <div class="box">
+            <div class="bank-details">
+              <p>
+                <strong>Routing number</strong> 
+                <span style="margin-left: 300px;">987654321</span>
+                <span style="color: blue;"><i class="fa-regular fa-copy"></i></span>
+              </p>
+              <p><strong>Account number<span style="margin-left:5px;"><i class="fa-regular fa-eye"></i></span></strong> <span style="margin-left: 295px;">••••0297</span>  
+                <span style="color: blue;">
+                   <i class="fa-regular fa-copy"></i>
+                </span>
+             </p> 
+             <p>
+              <strong>Bank<span style="margin-left:5px;"><i class="fa-solid fa-circle-question"></i></span></strong> <span style="margin-left: 300px;">Choice Financial Group</span> 
+              <span style="margin-left: 380px;">4501 23rd Avenue S </br>
+                <span style="margin-left: 385px;"></span>Fargo, ND 58104</span>  
+              <span style="color: blue;"><i class="fa-regular fa-copy"></i></span>
+           </p>
+           
+              <div class="view-statements-container">
+                <a href="#" class="view-statements">View Statements</a>
+                <button class="more-button">More •••</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="recent-transactions">
+          <h4>Recent transactions</h4>
+        </section>
+
+        <p style="margin-top: 190px; text-align: center">
+          No transactions yet <p style="margin-top: 10px; text-align: center">Make your first payment on this account.</p>
+        </p>
+      </main>
+    </div>
+
+    <script>
+      const moveMoneyBtn = document.getElementById("moveMoneyBtn");
+      const dropdownMenu = document.getElementById("dropdownMenu");
+
+      moveMoneyBtn.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          !moveMoneyBtn.contains(event.target) &&
+          !dropdownMenu.contains(event.target)
+        ) {
+          dropdownMenu.classList.remove("show");
+        }
+      });
+
+      const transferBtn = document.getElementById("transferBtn");
+      const transferDropdown = document.getElementById("transferDropdown");
+
+      transferBtn.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the click from propagating to the document listener
+        transferDropdown.classList.toggle("show");
+      });
+
+      document.addEventListener("click", () => {
+        transferDropdown.classList.remove("show");
+      });
+    </script>
+  </body>
+</html>
