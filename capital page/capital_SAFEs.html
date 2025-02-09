@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital - SAFEs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            padding: 20px 40px;
+            background-color: #f8f9fa;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1{
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .brand {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #666;
+            padding: 8px 0;
+        }
+
+        .nav a.active {
+            color: #4761FF;
+            border-bottom: 2px solid #4761FF;
+        }
+
+        .stats-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stats-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stats-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stats-value {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .stats-value.green {
+            color: #34C759;
+        }
+
+        .create-btn {
+            background: #4761FF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .table th {
+            text-align: left;
+            color: #666;
+            font-weight: normal;
+            padding: 8px 16px;
+        }
+
+        .table td {
+            padding: 16px;
+            background: #fff;
+        }
+
+        .table tr td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .table tr td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: #E8F0FE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4761FF;
+            font-weight: 500;
+            margin-right: 12px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-email {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #34C759;
+        }
+
+        .progress-item.pending {
+            color: #666;
+        }
+
+        .checkmark {
+            width: 16px;
+            height: 16px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="brand">Capital</h1>
+        <nav class="nav">
+            <a href="./capital-home.html">Home</a>
+            <a href="./capital-working_capital.html">Working Capital</a>
+            <a href="./capital_venture-debt.html">Venture Debt</a>
+            <a href="./capital_SAFEs.html" class="active">SAFEs</a>
+        </nav>
+    </header>
+
+    <div class="stats-card">
+        <div class="stats-item">
+            <span class="stats-label">Total</span>
+            <span class="stats-value">$10,011,000</span>
+        </div>
+        <div class="stats-item">
+            <span class="stats-label">Received</span>
+            <span class="stats-value green">$1,000</span>
+        </div>
+        <div class="stats-item">
+            <span class="stats-label">Outstanding</span>
+            <span class="stats-value">$10,010,000</span>
+        </div>
+        <div class="stats-item">
+            <span class="stats-label">SAFEs</span>
+            <span class="stats-value">3</span>
+        </div>
+        <button class="create-btn">
+            Create New SAFE +
+        </button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Progress</th>
+                <th>Valuation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">LR</div>
+                        <div class="user-details">
+                            <span>Logan Roy</span>
+                            <span class="user-email">logan@roy.co</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$1,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Payment received</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Post-Money</div>
+                    <div>$10,000,000.00</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">SM</div>
+                        <div class="user-details">
+                            <span>Scrooge McDuck</span>
+                            <span class="user-email">scrooge@duckduckgo.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000,000.00</td>
+                <td>
+                    <div class="progress-item">
+                        <span class="checkmark">✓</span>
+                        <span>Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="user-info">
+                        <div class="avatar">MB</div>
+                        <div class="user-details">
+                            <span>Montgomery Burns</span>
+                            <span class="user-email">bburns@springfieldpower.com</span>
+                        </div>
+                    </div>
+                </td>
+                <td>$10,000.00</td>
+                <td>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Not Signed</span>
+                    </div>
+                    <div class="progress-item pending">
+                        <span>—</span>
+                        <span>Payment pending</span>
+                    </div>
+                </td>
+                <td>
+                    <div>Pre-Money</div>
+                    <div>Uncapped</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        document.querySelectorAll('.table tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+            });
+
+            row.addEventListener('mouseleave', () => {
+                row.style.boxShadow = 'none';
+            });
+        });
+
+        const createBtn = document.querySelector('.create-btn');
+        createBtn.addEventListener('mousedown', () => {
+            createBtn.style.transform = 'scale(0.98)';
+        });
+
+        createBtn.addEventListener('mouseup', () => {
+            createBtn.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+
+</html>
